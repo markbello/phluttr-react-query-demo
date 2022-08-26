@@ -1,7 +1,9 @@
 import { FC, PropsWithChildren } from 'react'
 import logo from '../../assets/plitpiut-logo.png'
+import createMockendSchema from './createMockendSchema'
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
+  console.log(createMockendSchema())
   return (
     <body className="flex min-h-screen flex-col bg-white">
       <header className="flex h-20 items-center border border-b p-4 shadow-sm">
