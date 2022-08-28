@@ -7,8 +7,9 @@ export class UserController extends CrudController {
     throw new Error("Method not implemented.");
 }
 
-public read(req: Request, res: Response): void {
-    res.send(getUsers());
+public async read(req: Request, res: Response): Promise<void> {
+    const users = await getUsers();
+    res.send(users);
 }
 
 public update(req: Request, res: Response): void {
