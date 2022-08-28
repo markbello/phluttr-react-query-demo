@@ -1,3 +1,4 @@
+import LoadingWrapper from 'components/LoadingWrapper'
 import User from 'components/User'
 import { useEffect, useState } from 'react'
 import { getUsers } from 'services/usersService'
@@ -14,7 +15,17 @@ const Users = () => {
     hydrate()
   }, [])
 
-  return users.map((user) => <User user={user} key={user.id + user.birthday} />)
+  return (
+    <LoadingWrapper
+      loadStatuses={users.length === 0 ? ['loading'] : ['success']}
+    >
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+        {users.map((user) => (
+          <User user={user} key={user.id + user.birthday} />
+        ))}
+      </div>
+    </LoadingWrapper>
+  )
 }
 
 export default Users
