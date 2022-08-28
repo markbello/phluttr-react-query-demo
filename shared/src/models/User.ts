@@ -18,6 +18,8 @@ export interface User {
   profilePictureUrl: string
   gender: Gender
   transactions: Transaction[]
+  id?: string
+  _id: string
 }
 
 export interface AffectedParty {

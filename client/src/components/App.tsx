@@ -1,31 +1,18 @@
-import { useEffect, useState } from 'react'
-import { axios } from 'services'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './Layout'
-import User from './User'
-import { User as UserType } from '../../../shared/src/index'
+import Home from 'layouts/Home'
+import Users from 'layouts/Users'
 
 function App() {
-  const [users, setUsers] = useState<UserType[]>([])
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const response = await axios.get<UserType[]>('/users')
-      setUsers(response.data)
-    }
-    getUsers()
-  }, [])
-
   return (
-    <Layout>
-      <div className="grid grid-cols-3">
-        {users.map((user) => (
-          <User
-            user={user}
-            key={user.firstName + user.lastName + user.birthday}
-          />
-        ))}
-      </div>
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/users" element={<Users />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   )
 }
 

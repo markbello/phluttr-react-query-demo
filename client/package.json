@@ -21,8 +21,10 @@
   "dependencies": {
     "@tanstack/react-query": "^4.2.1",
     "axios": "^0.27.2",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "6"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
@@ -32,6 +34,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.7",
+    "@types/lodash": "^4.14.184",
     "@types/node": "^18.7.8",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",

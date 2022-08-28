@@ -1,3 +1,4 @@
+import { binaryToString } from "../utils/binaryToString";
 import { getCollection } from "./getCollection";
 
 type FindDocumentsProps = {
@@ -18,5 +19,6 @@ export const findDocuments = async <T = any>({
       dbResults.push(document);
     }
   }
+
   return dbResults;
 };
