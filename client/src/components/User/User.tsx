@@ -1,4 +1,4 @@
-import { User as UserType } from '../../utils/createMockendSchema'
+import { User as UserType } from '../../../../shared/src/utils/createMockUsers'
 
 const User = ({ user }: { user: UserType }) => {
   return (

@@ -1,17 +1,19 @@
-import { createMockUsers } from 'utils/createMockendSchema'
+import { useEffect, useState } from 'react'
+import { axios } from 'services'
 import Layout from './Layout'
 import User from './User'
-
-function random_sort(a, b) {
-  return Math.random() - 0.5
-}
+import { User as UserType } from '../../../shared/src/index'
 
 function App() {
-  const users = [...createMockUsers('FEMALE'), ...createMockUsers('MALE')].sort(
-    random_sort
-  )
+  const [users, setUsers] = useState<UserType[]>([])
 
-  console.log(JSON.stringify(users))
+  useEffect(() => {
+    const getUsers = async () => {
+      const response = await axios.get<UserType[]>('/users')
+      setUsers(response.data)
+    }
+    getUsers()
+  }, [])
 
   return (
     <Layout>

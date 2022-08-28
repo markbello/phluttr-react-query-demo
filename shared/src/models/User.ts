@@ -1,7 +1,7 @@
 import { PriorityModifier } from "./PriorityModifier"
 import { Transaction } from "./Transaction"
 
-type Gender = 'MALE' | 'FEMALE' | 'NON_BINARY' | 'UNDISCLOSED'
+export type Gender = 'MALE' | 'FEMALE' | 'NON_BINARY' | 'UNDISCLOSED'
 
 interface Follower {
   id: string

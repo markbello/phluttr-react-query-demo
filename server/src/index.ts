@@ -1,9 +1,13 @@
 import express from "express"
+import cors from 'cors'
+import { userRouter } from "./routes"
 
 const PORT = 5001
 
 const app = express()
+
 app.use(express.json())
+app.use(cors())
 
 const user =   {
   "firstName": "Gloria",
@@ -17,7 +21,9 @@ const user =   {
 };
 
 app.get('/api/v1', (req, res) => {
-  res.send(user)
+  res.send('Hello World')
 })
+
+app.use('/api/v1/users', userRouter)
 
 app.listen(PORT, () => console.log(`start listening on port : ${PORT}`))

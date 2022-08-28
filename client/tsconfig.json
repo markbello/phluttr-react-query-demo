@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "server"],
+  "include": ["src", "server", "../shared/src/createMockUsers.ts"],
   "exclude": ["node_modules"],
   "references": [{ "path": "../shared" }]
 }

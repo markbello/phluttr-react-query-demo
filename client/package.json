@@ -4,13 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "author": {
-    "name": "João Paulo Moraes",
-    "email": "joaopaulomoraes@outlook.com",
-    "url": "https://github.com/joaopaulomoraes"
-  },
-  "bugs": {
-    "url": "https://github.com/joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate/issues",
-    "email": "joaopaulomoraes@outlook.com"
+    "name": "Mark Bello",
+    "email": "mark@markbello.com",
+    "url": "https://github.com/markbello"
   },
   "scripts": {
     "dev": "vite",
@@ -24,6 +20,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.2.1",
+    "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -32,8 +29,6 @@
     "@babel/preset-env": "^7.18.10",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
-    "@faker-js/faker": "^7.4.0",
-    "@fakerjs/faker": "^3.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.7",
