@@ -8,7 +8,7 @@ export const userRouter = express.Router({
 
 const userController = new UserController();
 
-userRouter.get('/:userId', (req: Request, res: Response) => {
+userRouter.get('/:slug', (req: Request, res: Response) => {
   userController.readById(req, res);
 });
 

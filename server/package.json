@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.17.3",
+    "lodash": "^4.17.21",
     "mongodb": "^4.9.0",
     "openai": "^3.0.0",
     "uuid-mongodb": "^2.5.1"

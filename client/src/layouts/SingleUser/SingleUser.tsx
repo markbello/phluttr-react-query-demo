@@ -32,7 +32,7 @@ const SingleUser = () => {
         <div className="w-full">
           <div className="m-8 flex rounded-xl bg-white p-8 shadow-md">
             <img
-              src={user?.profilePictureUrl.replace('/thumb', '')}
+              src={user?.profilePicture[512]}
               className="h-48 w-48 rounded-full"
             />
             <h1 className="ml-16 text-4xl font-bold">

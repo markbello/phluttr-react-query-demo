@@ -22,7 +22,7 @@ const Users = () => {
     >
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
         {users.map((user) => (
-          <Link to={`/users/${user._id}`} key={user._id + user.birthday}>
+          <Link to={`/users/${user.slug}`} key={user._id + user.birthday}>
             <User user={user} />
           </Link>
         ))}

@@ -1,3 +1,4 @@
+import { Post } from "./Post"
 import { PriorityModifier } from "./PriorityModifier"
 import { Transaction } from "./Transaction"
 
@@ -15,11 +16,19 @@ export interface User {
   birthday: string
   followers: Follower[]
   following: Follower[]
-  profilePictureUrl: string
+  profilePicture: {
+    32: string;
+    64: string;
+    128: string;
+    256: string;
+    512: string;
+  };
   gender: Gender
   transactions: Transaction[]
   id?: string
   _id?: string
+  slug: string;
+  posts: Post[]
 }
 
 export interface AffectedParty {

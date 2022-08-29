@@ -27,13 +27,16 @@ const Home = () => {
   return (
     <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
       <div className="grid grid-cols-1 gap-4 p-8 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <Post
-            key={post._id}
-            post={post}
-            user={users.find(({ _id }) => _id === post.userId)!}
-          />
-        ))}
+        <div className="col-span-1 md:col-span-2">
+          {posts.map((post) => (
+            <div className="mb-4" key={post._id}>
+              <Post
+                post={post}
+                user={users.find(({ slug }) => slug === post.createdBy)!}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </LoadingWrapper>
   )

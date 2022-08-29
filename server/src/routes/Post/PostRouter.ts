@@ -11,6 +11,6 @@ const postController = new PostController();
 postRouter.get('/', (req: Request, res: Response) => {
   postController.read(req, res);
 });
-postRouter.get('/:userId', (req: Request, res: Response) => {
-  postController.readByUserId(req, res);
+postRouter.get('/:slug', (req: Request, res: Response) => {
+  postController.readBySlug(req, res);
 });

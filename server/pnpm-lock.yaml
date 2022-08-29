@@ -12,6 +12,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.2.1
   express: ^4.17.3
+  lodash: ^4.17.21
   mongodb: ^4.9.0
   nodemon: ^2.0.19
   openai: ^3.0.0
@@ -24,6 +25,7 @@ dependencies:
   cors: 2.8.5
   dotenv: 16.0.1
   express: 4.18.1
+  lodash: 4.17.21
   mongodb: 4.9.0
   openai: 3.0.0
   uuid-mongodb: 2.5.1_mongodb@4.9.0
@@ -1074,7 +1076,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /media-typer/0.3.0:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}

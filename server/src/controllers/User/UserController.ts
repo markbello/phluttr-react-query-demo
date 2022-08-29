@@ -16,7 +16,7 @@ public async read(req: Request, res: Response): Promise<void> {
 }
 
 public async readById(req: Request, res: Response): Promise<void> {
-    const user = await getUserById(req.params.userId);
+    const user = await getUserById(req.params.slug);
     setTimeout(() => {
         res.send(user);
     }, 1000)

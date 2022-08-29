@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { CrudController } from '../CrudController';
 import { getPosts } from './getPosts';
-import { getPostsByUserId } from './getPostsByUserId';
+import { getPostsBySlug } from './getPostsBySlug';
 
 export class PostController extends CrudController {
   public create(req: Request, res: Response): void {
@@ -15,8 +15,8 @@ public async read(req: Request, res: Response): Promise<void> {
     }, 1000)
     
 }
-public async readByUserId(req: Request, res: Response): Promise<void> {
-    const posts = await getPostsByUserId(req.params.userId);
+public async readBySlug(req: Request, res: Response): Promise<void> {
+    const posts = await getPostsBySlug(req.params.slug);
     setTimeout(() => {
         res.send(posts);
     }, 1000)
