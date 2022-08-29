@@ -16,6 +16,7 @@ export const fetchAllDocuments = async <T = any>({
   const cursor = collection.aggregate([
     ...matches.map(($match) => ({ $match })),
     { $limit: limit },
+    { "$project": { "_id": { "$toString": "$_id" } } }
   ]);
 
   const dbResults: any[] = [];

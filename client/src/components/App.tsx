@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './Layout'
 import Home from 'layouts/Home'
 import Users from 'layouts/Users'
+import SingleUser from 'layouts/SingleUser'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/users/:userId" element={<SingleUser />} />
           <Route path="/users" element={<Users />} />
         </Routes>
       </Layout>

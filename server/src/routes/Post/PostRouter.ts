@@ -8,6 +8,9 @@ export const postRouter = express.Router({
 
 const postController = new PostController();
 
-postRouter.get('/:userId', (req: Request, res: Response) => {
+postRouter.get('/', (req: Request, res: Response) => {
   postController.read(req, res);
+});
+postRouter.get('/:userId', (req: Request, res: Response) => {
+  postController.readByUserId(req, res);
 });

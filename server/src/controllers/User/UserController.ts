@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CrudController } from '../CrudController';
+import { getUserById } from './getUserById';
 import { getUsers } from './getUsers';
 
 export class UserController extends CrudController {
@@ -12,7 +13,13 @@ public async read(req: Request, res: Response): Promise<void> {
     setTimeout(() => {
         res.send(users);
     }, 1000)
-    
+}
+
+public async readById(req: Request, res: Response): Promise<void> {
+    const user = await getUserById(req.params.userId);
+    setTimeout(() => {
+        res.send(user);
+    }, 1000)
 }
 
 public update(req: Request, res: Response): void {
