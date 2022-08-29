@@ -19,7 +19,7 @@ export interface User {
   gender: Gender
   transactions: Transaction[]
   id?: string
-  _id: string
+  _id?: string
 }
 
 export interface AffectedParty {

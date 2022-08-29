@@ -1,6 +1,6 @@
 import { connectToDatabase } from '../utils/connectToDatabase';
 
-export const getCollection = async <T>(collectionName: string) => {
+export const getCollection = async (collectionName: string) => {
   const db = await connectToDatabase();
-  return db.collection<T>(collectionName);
+  return db.collection(collectionName);
 };
