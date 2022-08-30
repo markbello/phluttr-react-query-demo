@@ -20,7 +20,7 @@ const FollowerUser = ({ slug }: { slug: string }) => {
 
   return (
     <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
-      <Link className="my-2 flex items-center" to={`/users/${user?.slug}`}>
+      <Link className="flex items-center" to={`/users/${user?.slug}`}>
         <img
           src={user?.profilePicture[64]}
           className="h-12 w-12 rounded-full"

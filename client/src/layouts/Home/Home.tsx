@@ -36,10 +36,19 @@ const Home = () => {
     ({ createdBy }) => createdBy !== loggedInSlug
   )
 
-  let sortedPosts = [...filteredPosts]
+  // let sortedPosts = [...filteredPosts]
   const sortFns = getSortFunctions(loggedInSlug, users)
-  sortFns.forEach((sortFn) => {
-    sortedPosts = sortedPosts.sort(sortFn)
+  // sortFns.forEach((sortFn) => {
+  //   sortedPosts = sortedPosts.sort(sortFn)
+  // })
+  const sortedPosts = filteredPosts.sort((a, b) => {
+    let result = 0
+
+    sortFns.forEach((sortFn) => {
+      result = sortFn(a, b)
+    })
+
+    return result
   })
 
   return (

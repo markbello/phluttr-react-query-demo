@@ -60,7 +60,9 @@ const FollowerList = ({
             <div className="text-sm italic">{noItemsMessage}</div>
           ) : (
             relatedUsers.map((follower) => (
-              <FollowerUser key={follower.slug} slug={follower.slug} />
+              <div className="my-2" key={follower.slug}>
+                <FollowerUser slug={follower.slug} />
+              </div>
             ))
           )}
         </LoadingWrapper>
