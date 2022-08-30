@@ -8,6 +8,7 @@ import { Post as PostType } from '../../../../shared/src/models/Post'
 import FollowerList from '../../components/FollowerList'
 import type { RootState } from '../../redux/store'
 import { useSelector } from 'react-redux'
+import { getSortFunctions } from './sortFunctions'
 
 const Home = () => {
   const [posts, setPosts] = useState<PostType[]>([])
@@ -31,11 +32,21 @@ const Home = () => {
     (state: RootState) => state.appState.loggedInAs
   )
 
+  const filteredPosts = posts.filter(
+    ({ createdBy }) => createdBy !== loggedInSlug
+  )
+
+  let sortedPosts = [...filteredPosts]
+  const sortFns = getSortFunctions(loggedInSlug, users)
+  sortFns.forEach((sortFn) => {
+    sortedPosts = sortedPosts.sort(sortFn)
+  })
+
   return (
     <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
       <div className="grid grid-cols-1 gap-8 p-8 md:grid-cols-3">
         <div className="col-span-1 md:col-span-2">
-          {posts.map((post) => (
+          {sortedPosts.map((post) => (
             <div className="mb-4" key={post._id}>
               <Post
                 post={post}

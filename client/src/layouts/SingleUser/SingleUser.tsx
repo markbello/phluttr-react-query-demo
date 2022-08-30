@@ -8,6 +8,10 @@ import { Post as PostType } from '../../../../shared/src/models/Post'
 import Post from 'components/Post'
 import FollowerList from 'components/FollowerList'
 import { sortBy, shuffle } from 'lodash'
+import { useLoggedInUserSlug } from 'hooks/useLoggedInUserSlug'
+import UserCircle from './UserCircle'
+import { useDispatch } from 'react-redux'
+import { setLoggedInAs } from '../../redux/appState'
 
 const SingleUser = () => {
   const { userId = '' } = useParams<{ userId: string }>()
@@ -39,6 +43,9 @@ const SingleUser = () => {
     }
   }, [posts])
 
+  const loggedInSlug = useLoggedInUserSlug()
+  const dispatch = useDispatch()
+
   return (
     <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
       <div className="block">
@@ -49,9 +56,28 @@ const SingleUser = () => {
               className="h-48 w-48 rounded-full"
             />
             <div className="ml-16">
-              <h1 className="text-4xl font-bold">
-                {user?.firstName} {user?.lastName}
-              </h1>
+              <div className="flex justify-between">
+                <h1 className="text-4xl font-bold">
+                  {user?.firstName} {user?.lastName}
+                </h1>
+                {loggedInSlug !== user?.slug && (
+                  <button
+                    className="flex items-center"
+                    onClick={() => dispatch(setLoggedInAs(user?.slug || ''))}
+                  >
+                    <UserCircle />
+                    <p className="ml-2">Log In as User</p>
+                  </button>
+                )}
+              </div>
+              <p className="mt-2 text-xl text-gray-400">
+                {`Age ${
+                  new Date().getFullYear() -
+                  new Date(user?.birthday || '').getFullYear()
+                } - ${user?.followers.length} ${
+                  user?.followers.length === 1 ? 'Follower' : 'Followers'
+                }`}
+              </p>
               <p className="mt-8 text-xl">{leadingPost?.text}</p>
             </div>
           </div>

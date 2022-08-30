@@ -8,6 +8,8 @@ import Likes from './Likes'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../redux/store'
 import { addFollower } from 'services/usersService/addFollower'
+import BadgeIcon from './BadgeIcon'
+import StarIcon from './StarIcon'
 
 const Post = ({ user, post }: { user: UserType; post: PostType }) => {
   const loggedInSlug = useSelector(
@@ -32,14 +34,26 @@ const Post = ({ user, post }: { user: UserType; post: PostType }) => {
                 className="h-16 w-16 rounded-full"
               />
               <div className="ml-4">
-                <div className="font-semibold">
-                  {user.firstName} {user.lastName}
+                <div className="flex items-center">
+                  <div className="text-lg font-semibold">
+                    {user.firstName} {user.lastName}
+                  </div>
+                  {user.followers.length > 5 && (
+                    <div className="ml-2 text-blue-500">
+                      <BadgeIcon />
+                    </div>
+                  )}
                 </div>
                 <div>{new Date(post.createdAt).toLocaleString()}</div>
               </div>
             </div>
           </Link>
-          {!user.followers.find(({ slug }) => slug === loggedInSlug) && (
+          {user.followers.find(({ slug }) => slug === loggedInSlug) ? (
+            <div className="flex items-center whitespace-nowrap">
+              <StarIcon />
+              <div className="ml-2 text-sm">Following</div>
+            </div>
+          ) : (
             <button
               className="flex items-center whitespace-nowrap"
               onClick={handleAddFollower}
