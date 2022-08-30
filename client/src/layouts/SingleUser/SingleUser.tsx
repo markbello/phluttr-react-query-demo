@@ -6,6 +6,7 @@ import { getUserById } from 'services/usersService'
 import { User } from '../../../../shared/src/models'
 import { Post as PostType } from '../../../../shared/src/models/Post'
 import Post from 'components/Post'
+import FollowerList from 'components/FollowerList'
 
 const SingleUser = () => {
   const { userId = '' } = useParams<{ userId: string }>()
@@ -41,12 +42,20 @@ const SingleUser = () => {
           </div>
         </div>
       </div>
-      <div className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <div className="col-span-1 mx-8 mt-4 md:col-span-2" key={post._id}>
-            <Post post={post} user={user!} />
+      <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="col-span-1 ml-8 lg:col-span-2 ">
+          {posts.map((post) => (
+            <div className="mt-4" key={post._id}>
+              <Post post={post} user={user!} />
+            </div>
+          ))}
+        </div>
+        <div className="mr-8 hidden md:col-span-1 md:block">
+          <div className="my-4">
+            <FollowerList direction="user-following" slug={user?.slug || ''} />
           </div>
-        ))}
+          <FollowerList direction="following-user" slug={user?.slug || ''} />
+        </div>
       </div>
     </LoadingWrapper>
   )

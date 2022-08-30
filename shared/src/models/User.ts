@@ -4,7 +4,7 @@ import { Transaction } from "./Transaction"
 
 export type Gender = 'MALE' | 'FEMALE' | 'NON_BINARY' | 'UNDISCLOSED'
 
-interface Follower {
+export interface Follower {
   slug: string
   priorityModifiers: PriorityModifier[]
   status: 'ACTIVE_PUBLIC' | 'ACTIVE_SHADOW' | 'INACTIVE' | 'BLOCKED'

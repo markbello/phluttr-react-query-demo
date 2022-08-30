@@ -15,3 +15,7 @@ userRouter.get('/:slug', (req: Request, res: Response) => {
 userRouter.get('/', (req: Request, res: Response) => {
   userController.read(req, res);
 });
+
+userRouter.post('/:followeeSlug/followers', (req: Request, res: Response) => {
+  userController.addFollower(req, res)
+})
