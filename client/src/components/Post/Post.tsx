@@ -3,28 +3,20 @@ import {
   User as UserType,
   Post as PostType
 } from '../../../../shared/src/models'
-import AddFriendIcon from './AddFriendIcon'
 import Likes from './Likes'
-import { useSelector } from 'react-redux'
-import type { RootState } from '../../redux/store'
-import { addFollower } from 'services/usersService/addFollower'
 import BadgeIcon from './BadgeIcon'
-import StarIcon from './StarIcon'
+import { useLoggedInUserSlug } from 'hooks/useLoggedInUserSlug'
+import FollowersButton from './FollowersButton'
 
 const Post = ({ user, post }: { user: UserType; post: PostType }) => {
-  const loggedInSlug = useSelector(
-    (state: RootState) => state.appState.loggedInAs
-  )
-
-  const handleAddFollower = async () => {
-    await addFollower({
-      followeeSlug: post.createdBy,
-      followerSlug: loggedInSlug
-    })
-  }
+  const loggedInSlug = useLoggedInUserSlug()
 
   return (
-    <div className="rounded-xl bg-white pt-8 shadow-md">
+    <div
+      className={`rounded-xl bg-white pt-8 shadow-md ${
+        loggedInSlug === post.createdBy ? 'pb-4' : ''
+      }`}
+    >
       <div className="px-8">
         <div className="flex justify-between">
           <Link className="w-full cursor-pointer" to={`/users/${user.slug}`}>
@@ -48,26 +40,17 @@ const Post = ({ user, post }: { user: UserType; post: PostType }) => {
               </div>
             </div>
           </Link>
-          {user.followers.find(({ slug }) => slug === loggedInSlug) ? (
-            <div className="flex items-center whitespace-nowrap">
-              <StarIcon />
-              <div className="ml-2 text-sm">Following</div>
-            </div>
-          ) : (
-            <button
-              className="flex items-center whitespace-nowrap"
-              onClick={handleAddFollower}
-            >
-              <AddFriendIcon />
-              <div className="ml-2 text-sm">Follow</div>
-            </button>
+          {loggedInSlug !== post.createdBy && (
+            <FollowersButton user={user} post={post} />
           )}
         </div>
         <div className="my-4">{post.text}</div>
       </div>
-      <div className="flex rounded-b-xl border-t px-8 py-4">
-        <Likes likes={post.likes} postId={post._id!} />
-      </div>
+      {post.createdBy !== loggedInSlug && (
+        <div className="flex rounded-b-xl border-t px-8 py-4">
+          <Likes likes={post.likes} postId={post._id!} />
+        </div>
+      )}
     </div>
   )
 }
