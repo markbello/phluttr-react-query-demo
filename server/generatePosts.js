@@ -13,37 +13,47 @@ const maleComplaints = require('./male-complaints.json')
 const horrorStories = require('./horror-stories.json')
 const oldTimeyStories = require('./oldTimeyStories.json')
 
-const posts = []
+const zuckStories = require('./zuck.json')
 
-elderlyUsers.forEach((user, index) => {
-  const collections = [
-    complaints,
-    complaints2,
-    complaints3,
-    socialMediaComplaints,
-    technologyComplaints,
-    horrorStories,
-    oldTimeyStories
-  ]
+const posts = shuffle(
+  zuckStories.map((story) => ({
+    text: story,
+    createdAt: faker.date.recent(),
+    createdBy: 'zuck',
+    comments: [],
+    likes: []
+  }))
+)
 
-  const collectionsForUser =
-    user.gender === 'MALE'
-      ? [...collections, maleComplaints]
-      : [...collections, femaleComplaints]
+// elderlyUsers.forEach((user, index) => {
+//   const collections = [
+//     complaints,
+//     complaints2,
+//     complaints3,
+//     socialMediaComplaints,
+//     technologyComplaints,
+//     horrorStories,
+//     oldTimeyStories
+//   ]
 
-  const randomlyOrderedCollections = shuffle(collectionsForUser)
+//   const collectionsForUser =
+//     user.gender === 'MALE'
+//       ? [...collections, maleComplaints]
+//       : [...collections, femaleComplaints]
 
-  randomlyOrderedCollections.forEach((collection) => {
-    const post = {
-      text: collection[index],
-      createdAt: faker.date.recent(),
-      createdBy: user.slug,
-      comments: [],
-      likes: []
-    }
+//   const randomlyOrderedCollections = shuffle(collectionsForUser)
 
-    posts.push(post)
-  })
-})
+//   randomlyOrderedCollections.forEach((collection) => {
+// const post = {
+//   text: collection[index],
+//   createdAt: faker.date.recent(),
+//   createdBy: user.slug,
+//   comments: [],
+//   likes: []
+// }
+
+//     posts.push(post)
+//   })
+// })
 
 console.log(JSON.stringify(posts))

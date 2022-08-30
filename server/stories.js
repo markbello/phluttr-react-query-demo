@@ -6,11 +6,12 @@ const configuration = new Configuration({})
 const openai = new OpenAIApi(configuration)
 
 const getOpenAiStories = () => {
-  Array.from({ length: 100 }).forEach(() => {
+  Array.from({ length: 8 }).forEach(() => {
     openai
       .createCompletion({
         model: 'text-davinci-002',
-        prompt: `'Topic: ${faker.word.noun()}\n2-sentence geriatric complaint about social media:'`,
+        prompt: `'Topic: Metaverse\n2-sentences about it not being totally creepy:'`,
+        // prompt: `'Topic: ${faker.word.noun()}\n2-sentences of a robot trying to convince a person that it is human:'`,
         temperature: 0.8,
         max_tokens: 60,
         top_p: 1.0,
