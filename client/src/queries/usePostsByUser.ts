@@ -27,13 +27,7 @@ export const usePostsByUser = (slug: string) => {
 
       queryClient.setQueryData([QueryKeys.GetPostById, post._id], () => post)
     })
-  }, [
-    allPosts,
-    allPosts.length,
-    allPostsForUser,
-    allPostsForUser.length,
-    queryClient
-  ])
+  }, [allPosts.length, allPostsForUser.length])
 
   return baseQuery
 }

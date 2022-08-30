@@ -36,7 +36,7 @@ const SingleUser = () => {
 
   return (
     <LoadingWrapper loadStatuses={[postsStatus, userStatus]}>
-      <div className="block">
+      <div className="block" key={userId}>
         <div className="w-full">
           <div className="m-8 flex grow rounded-xl bg-white p-8 shadow-md">
             <img

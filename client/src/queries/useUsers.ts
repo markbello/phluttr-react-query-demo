@@ -15,7 +15,7 @@ export const useUsers = () => {
     allUsers.forEach((user) => {
       queryClient.setQueryData([QueryKeys.GetUser, user.slug], () => user)
     })
-  }, [allUsers, allUsers.length, queryClient])
+  }, [allUsers.length])
 
   return baseQuery
 }

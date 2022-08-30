@@ -20,7 +20,7 @@ export const usePosts = () => {
 
       queryClient.setQueryData([QueryKeys.GetPostById, post._id], () => post)
     })
-  }, [allPosts, allPosts.length, queryClient])
+  }, [allPosts.length])
 
   return baseQuery
 }

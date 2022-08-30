@@ -36,7 +36,9 @@ const AvatarMenu = () => {
       >
         <img
           src={
-            loggedInSlug === 'zuck' ? zuck : loggedInUser?.profilePicture[64]
+            loggedInSlug === 'zuck'
+              ? zuck
+              : (loggedInUser?.profilePicture || {})[64]
           }
           className="h-12 rounded-full"
         />
