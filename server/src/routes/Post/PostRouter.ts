@@ -12,7 +12,11 @@ postRouter.get('/', (req: Request, res: Response) => {
   postController.read(req, res);
 });
 
-postRouter.get('/:slug', (req: Request, res: Response) => {
+postRouter.get('/:id', (req: Request, res: Response) => {
+  postController.readById(req, res);
+});
+
+postRouter.get('/by-user/:slug', (req: Request, res: Response) => {
   postController.readBySlug(req, res);
 });
 
