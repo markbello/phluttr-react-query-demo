@@ -19,6 +19,7 @@
     "build:schema": "npx ./create-mockend-schema.js"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.8",
     "@redux-devtools/core": "^3.13.1",
     "@redux-devtools/extension": "^3.2.3",
     "@reduxjs/toolkit": "^1.8.5",

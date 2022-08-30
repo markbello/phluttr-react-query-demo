@@ -21,7 +21,7 @@ const LoadingWrapper: FC<
     )
   }
 
-  return <>{children}</>
+  return <div className="block w-full">{children}</div>
 }
 
 export default LoadingWrapper

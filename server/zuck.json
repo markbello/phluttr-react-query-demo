@@ -1,0 +1,20 @@
+[
+  {
+    "firstName": "Zuck",
+    "lastName": "",
+    "birthday": "1924-12-02T06:43:02.691Z",
+    "followers": [],
+    "following": [],
+    "profilePicture": {
+      "32": "https://blogs-images.forbes.com/briansolomon/files/2016/04/mark-zuckerberg.jpg",
+      "64": "https://blogs-images.forbes.com/briansolomon/files/2016/04/mark-zuckerberg.jpg",
+      "128": "https://blogs-images.forbes.com/briansolomon/files/2016/04/mark-zuckerberg.jpg",
+      "256": "https://blogs-images.forbes.com/briansolomon/files/2016/04/mark-zuckerberg.jpg",
+      "512": "https://blogs-images.forbes.com/briansolomon/files/2016/04/mark-zuckerberg.jpg"
+    },
+    "gender": "MALE",
+    "posts": [],
+    "createdAt": "2019-09-20T11:34:12.665Z",
+    "slug": "zuck"
+  }
+]

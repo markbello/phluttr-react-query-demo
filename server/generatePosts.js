@@ -13,13 +13,6 @@ const maleComplaints = require('./male-complaints.json')
 const horrorStories = require('./horror-stories.json')
 const oldTimeyStories = require('./oldTimeyStories.json')
 
-// const oldTimeyPosts = userIds.map((userId, index) => ({
-//   text: oldTimeyStories[index],
-//   createdAt: faker.date.recent(),
-//   userId,
-//   comments: []
-// }))
-
 const posts = []
 
 elderlyUsers.forEach((user, index) => {
@@ -45,7 +38,8 @@ elderlyUsers.forEach((user, index) => {
       text: collection[index],
       createdAt: faker.date.recent(),
       createdBy: user.slug,
-      comments: []
+      comments: [],
+      likes: []
     }
 
     posts.push(post)

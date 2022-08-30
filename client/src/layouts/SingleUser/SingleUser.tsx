@@ -30,7 +30,7 @@ const SingleUser = () => {
     <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
       <div className="block">
         <div className="w-full">
-          <div className="m-8 flex rounded-xl bg-white p-8 shadow-md">
+          <div className="m-8 flex grow rounded-xl bg-white p-8 shadow-md">
             <img
               src={user?.profilePicture[512]}
               className="h-48 w-48 rounded-full"
@@ -40,11 +40,13 @@ const SingleUser = () => {
             </h1>
           </div>
         </div>
-        <div className="mx-8 mt-4">
-          {posts.map((post) => (
-            <Post post={post} user={user!} key={post._id} />
-          ))}
-        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <div className="col-span-1 mx-8 mt-4 md:col-span-2" key={post._id}>
+            <Post post={post} user={user!} />
+          </div>
+        ))}
       </div>
     </LoadingWrapper>
   )

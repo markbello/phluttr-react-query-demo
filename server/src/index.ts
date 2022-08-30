@@ -2,6 +2,7 @@ import express from "express"
 import cors from 'cors'
 import { postRouter, userRouter } from "./routes"
 import dotenv from 'dotenv'
+import bodyParser from 'body-parser'
 
 const PORT = 5001
 
@@ -11,6 +12,7 @@ dotenv.config()
 
 app.use(express.json())
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/v1', (req, res) => {
   res.send('Hello World')
