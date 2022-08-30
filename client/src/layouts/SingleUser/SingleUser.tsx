@@ -41,7 +41,7 @@ const SingleUser = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <div className="col-span-1 mx-8 mt-4 md:col-span-2" key={post._id}>
             <Post post={post} user={user!} />
