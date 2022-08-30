@@ -1,25 +1,14 @@
 import LoadingWrapper from 'components/LoadingWrapper'
-import { useEffect, useState } from 'react'
-import { getUserById } from 'services/usersService'
 import { Link } from 'react-router-dom'
 import { User as UserType } from '../../../../../shared/src/models'
+import { useUserBySlug } from 'queries/useUserBySlug'
 
 const FollowerUser = ({ slug }: { slug: string }) => {
-  const [user, setUser] = useState<UserType>()
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const hydrate = async () => {
-      const users = await getUserById(slug)
-      setUser(users)
-
-      setIsLoading(false)
-    }
-    hydrate()
-  }, [])
+  const { data: user = {} as UserType, status: userStatus } =
+    useUserBySlug(slug)
 
   return (
-    <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
+    <LoadingWrapper loadStatuses={[userStatus]}>
       <Link className="flex items-center" to={`/users/${user?.slug}`}>
         <img
           src={user?.profilePicture[64]}

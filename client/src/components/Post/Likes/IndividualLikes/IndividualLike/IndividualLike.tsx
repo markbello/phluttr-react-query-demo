@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { getUserById } from 'services/usersService'
+import { useUserBySlug } from 'queries/useUserBySlug'
 import { User } from '../../../../../../../shared/src/models'
 
 const IndividualLike = ({
@@ -9,19 +8,11 @@ const IndividualLike = ({
   createdBy: string
   zIndex: number
 }) => {
-  const [createdByUser, setCreatedByUser] = useState<User>()
-
-  useEffect(() => {
-    const hydrate = async () => {
-      const user = await getUserById(createdBy)
-      setCreatedByUser(user)
-    }
-    hydrate()
-  }, [createdBy])
+  const { data: createdByUser = {} as User } = useUserBySlug(createdBy)
 
   return (
     <>
-      {createdByUser && (
+      {createdByUser.profilePicture && (
         <img
           src={createdByUser.profilePicture[32]}
           className="-ml-2 h-8 w-8 rounded-full"

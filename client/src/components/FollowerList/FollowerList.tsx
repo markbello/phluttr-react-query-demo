@@ -1,7 +1,6 @@
 import LoadingWrapper from 'components/LoadingWrapper'
 import { useLoggedInUserSlug } from 'hooks/useLoggedInUserSlug'
-import { useEffect, useState } from 'react'
-import { getUsers } from 'services/usersService'
+import { useUsers } from 'queries/useUsers'
 import { User as UserType } from '../../../../shared/src/models'
 
 import FollowerUser from './FollowerUser'
@@ -15,18 +14,7 @@ const FollowerList = ({
 }) => {
   const loggedInUserSlug = useLoggedInUserSlug()
 
-  const [users, setUsers] = useState<UserType[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const hydrate = async () => {
-      const users = await getUsers()
-      setUsers(users)
-
-      setIsLoading(false)
-    }
-    hydrate()
-  }, [])
+  const { data: users = [] as UserType[], status: usersStatus } = useUsers()
 
   const thisUser =
     users.find(({ slug: thisSlug }) => thisSlug === slug) || ({} as UserType)
@@ -55,7 +43,7 @@ const FollowerList = ({
         {direction === 'user-following' ? 'Following' : 'Followers'}
       </h3>
       <div className="mt-4">
-        <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
+        <LoadingWrapper loadStatuses={[usersStatus]}>
           {relatedUsers.length === 0 ? (
             <div className="text-sm italic">{noItemsMessage}</div>
           ) : (

@@ -1,32 +1,17 @@
 import LoadingWrapper from 'components/LoadingWrapper'
 import Post from 'components/Post'
-import { useEffect, useState } from 'react'
-import { getPosts } from 'services/postsService/getPosts'
-import { getUsers } from 'services/usersService'
 import { User } from '../../../../shared/src/models'
 import { Post as PostType } from '../../../../shared/src/models/Post'
 import FollowerList from '../../components/FollowerList'
 import type { RootState } from '../../redux/store'
 import { useSelector } from 'react-redux'
 import { getSortFunctions } from './sortFunctions'
+import { usePosts } from 'queries/usePosts'
+import { useUsers } from 'queries/useUsers'
 
 const Home = () => {
-  const [posts, setPosts] = useState<PostType[]>([])
-  const [users, setUsers] = useState<User[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const hydrate = async () => {
-      const posts = await getPosts()
-      setPosts(posts)
-
-      const users = await getUsers()
-      setUsers(users)
-
-      setIsLoading(false)
-    }
-    hydrate()
-  }, [])
+  const { data: posts = [] as PostType[], status: postsStatus } = usePosts()
+  const { data: users = [] as User[], status: usersStatus } = useUsers()
 
   const loggedInSlug = useSelector(
     (state: RootState) => state.appState.loggedInAs
@@ -52,7 +37,7 @@ const Home = () => {
   })
 
   return (
-    <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
+    <LoadingWrapper loadStatuses={[postsStatus, usersStatus]}>
       <div className="grid grid-cols-1 gap-8 p-8 md:grid-cols-3">
         <div className="col-span-1 md:col-span-2">
           {sortedPosts.map((post) => (

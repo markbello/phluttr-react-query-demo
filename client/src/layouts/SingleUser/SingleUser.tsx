@@ -1,8 +1,6 @@
 import LoadingWrapper from 'components/LoadingWrapper'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getPostsForUser } from 'services/postsService'
-import { getUserById } from 'services/usersService'
 import { User } from '../../../../shared/src/models'
 import { Post as PostType } from '../../../../shared/src/models/Post'
 import Post from 'components/Post'
@@ -12,26 +10,16 @@ import { useLoggedInUserSlug } from 'hooks/useLoggedInUserSlug'
 import UserCircle from './UserCircle'
 import { useDispatch } from 'react-redux'
 import { setLoggedInAs } from '../../redux/appState'
+import { usePostsByUser } from 'queries/usePostsByUser'
+import { useUserBySlug } from 'queries/useUserBySlug'
 
 const SingleUser = () => {
   const { userId = '' } = useParams<{ userId: string }>()
-  const [posts, setPosts] = useState<PostType[]>([])
   const [leadingPost, setLeadingPost] = useState<PostType>()
-  const [user, setUser] = useState<User>()
-  const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const hydrate = async () => {
-      const posts = await getPostsForUser(userId)
-      setPosts(posts)
-
-      const user = await getUserById(userId)
-      setUser(user)
-
-      setIsLoading(false)
-    }
-    hydrate()
-  }, [userId])
+  const { data: posts = [] as PostType[], status: postsStatus } =
+    usePostsByUser(userId)
+  const { data: user = {} as User, status: userStatus } = useUserBySlug(userId)
 
   useEffect(() => {
     if (!leadingPost && posts.length > 0) {
@@ -47,7 +35,7 @@ const SingleUser = () => {
   const dispatch = useDispatch()
 
   return (
-    <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
+    <LoadingWrapper loadStatuses={[postsStatus, userStatus]}>
       <div className="block">
         <div className="w-full">
           <div className="m-8 flex grow rounded-xl bg-white p-8 shadow-md">

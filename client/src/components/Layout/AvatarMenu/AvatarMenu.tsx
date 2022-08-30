@@ -1,4 +1,4 @@
-import { LegacyRef, useEffect, useRef, useState } from 'react'
+import { LegacyRef, useRef, useState } from 'react'
 import useOnClickOutside from './useOnClickOutside'
 import UserItem from './UserItem'
 import zuck from './zuck-square-2.png'
@@ -6,8 +6,8 @@ import type { RootState } from '../../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { setLoggedInAs } from '../../../redux/appState'
 import { User } from '../../../../../shared/src/models'
-import { getUsers } from 'services/usersService'
 import LoadingWrapper from 'components/LoadingWrapper'
+import { useUserBySlug } from 'queries/useUserBySlug'
 
 const AvatarMenu = () => {
   const loggedInSlug = useSelector(
@@ -20,20 +20,8 @@ const AvatarMenu = () => {
   const ref = useRef<HTMLDivElement>() as LegacyRef<HTMLDivElement>
   useOnClickOutside(ref, () => setIsMenuOpen(false))
 
-  const [users, setUsers] = useState<User[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const hydrate = async () => {
-      const users = await getUsers()
-      setUsers(users)
-
-      setIsLoading(false)
-    }
-    hydrate()
-  }, [])
-
-  const loggedInUser = users.find(({ slug }) => slug === loggedInSlug)
+  const { data: loggedInUser = {} as User, status: userStatus } =
+    useUserBySlug(loggedInSlug)
 
   const handleUserClick = (selectedUserSlug: string) => {
     dispatch(setLoggedInAs(selectedUserSlug))
@@ -58,7 +46,7 @@ const AvatarMenu = () => {
           className="absolute top-16 right-8 w-72 rounded-xl border bg-white shadow-md"
           ref={ref}
         >
-          <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
+          <LoadingWrapper loadStatuses={[userStatus]}>
             <h3 className="mb-2 w-full border-b p-2 text-center text-lg">
               Change User
             </h3>
