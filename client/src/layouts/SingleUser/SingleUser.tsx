@@ -7,10 +7,12 @@ import { User } from '../../../../shared/src/models'
 import { Post as PostType } from '../../../../shared/src/models/Post'
 import Post from 'components/Post'
 import FollowerList from 'components/FollowerList'
+import { sortBy, shuffle } from 'lodash'
 
 const SingleUser = () => {
   const { userId = '' } = useParams<{ userId: string }>()
   const [posts, setPosts] = useState<PostType[]>([])
+  const [leadingPost, setLeadingPost] = useState<PostType>()
   const [user, setUser] = useState<User>()
   const [isLoading, setIsLoading] = useState(true)
 
@@ -27,6 +29,16 @@ const SingleUser = () => {
     hydrate()
   }, [userId])
 
+  useEffect(() => {
+    if (!leadingPost && posts.length > 0) {
+      const [newLeadingPost] = posts.every(({ likes }) => likes.length === 0)
+        ? shuffle(posts)
+        : sortBy(posts, ({ likes }) => likes.length)
+
+      setLeadingPost(newLeadingPost)
+    }
+  }, [posts])
+
   return (
     <LoadingWrapper loadStatuses={isLoading ? ['loading'] : ['success']}>
       <div className="block">
@@ -36,9 +48,12 @@ const SingleUser = () => {
               src={user?.profilePicture[512]}
               className="h-48 w-48 rounded-full"
             />
-            <h1 className="ml-16 text-4xl font-bold">
-              {user?.firstName} {user?.lastName}
-            </h1>
+            <div className="ml-16">
+              <h1 className="text-4xl font-bold">
+                {user?.firstName} {user?.lastName}
+              </h1>
+              <p className="mt-8 text-xl">{leadingPost?.text}</p>
+            </div>
           </div>
         </div>
       </div>
